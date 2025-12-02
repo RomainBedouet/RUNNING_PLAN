@@ -1,1 +1,16 @@
 // Specific CSS for your home-page
+body {
+  background-image: url('https://res.cloudinary.com/dedvsunhm/image/upload/v1764691868/andrea-leopardi-QVD3Xht9txA-unsplash_jhla3s.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  border: 1px solid black;
+}
+
+#Welcome {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  box-shadow: 10 10 10 10;
+}
