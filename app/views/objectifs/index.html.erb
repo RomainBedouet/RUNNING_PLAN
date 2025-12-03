@@ -1,0 +1,9 @@
+<h1>Voici la liste des objectifs proposés :</h1>
+
+<ul>
+  <% @objectifs.each do |objectif| %>
+    <li><%= link_to objectif.name, objectif_path(objectif) %></li>
+  <% end %>
+</ul>
+
+<p>Aucun objectif ne me convient : Saisir mon propre objectif</p>

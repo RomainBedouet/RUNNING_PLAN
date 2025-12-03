@@ -1,0 +1,13 @@
+<h1><%= @objectif.name %></h1>
+
+<%= form_with model: @objectif do |f| %>
+  <%= f.label :km, "Précisez le nombre de kilomètres pour atteindre l'objectif" %>
+  <%= f.number_field :km %>
+  <%= f.label :actual_time, "Précisez votre temps actuel pour parcourir le nombre de kilomètre (en minute)" %>
+  <%= f.number_field :actual_time %>
+  <%= f.label :goal_time, "Précisez le temps visé pour votre prochaine course (en minute)" %>
+  <%= f.number_field :goal_time %>
+  <%= f.submit "Enregistrer mon objectif" %>
+<% end %>
+
+<%= link_to "Retour à la liste des objectifs", objectifs_path %>
