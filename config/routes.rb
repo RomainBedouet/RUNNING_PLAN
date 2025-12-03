@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :user_profiles, only: [:new, :create, :edit, :update]
 
   resources :objectifs, only: [:index, :show]
   get "/objectifs", to: "objectifs#index"
