@@ -1,4 +1,6 @@
 class RunningChatsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show, :create]
+
   def show
   end
 
