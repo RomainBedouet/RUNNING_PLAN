@@ -1,9 +1,14 @@
-<h1>Voici la liste des objectifs proposés :</h1>
+<div class="container py-5">
+  <div class="card p-4 shadow" style="background-color: white;">
+    <h1 class="mb-4 text-center">Liste des objectifs</h1>
 
-<ul>
-  <% @objectifs.each do |objectif| %>
-    <li><%= link_to objectif.name, objectif_path(objectif) %></li>
-  <% end %>
-</ul>
-
-<p>Aucun objectif ne me convient : Saisir mon propre objectif</p>
+    <ul class="list-group list-group-flush">
+      <% @objectifs.each do |objectif| %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= objectif.name %>
+          <%= link_to "Je choisis cet objectif", objectif_path(objectif), class: "btn btn-primary btn-sm" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,13 +1,26 @@
-<h1><%= @objectif.name %></h1>
+<%= link_to "Retour à la liste des objectifs", objectifs_path, class: "btn btn-primary mt-3" %>
 
-<%= form_with model: @objectif do |f| %>
-  <%= f.label :km, "Précisez le nombre de kilomètres pour atteindre l'objectif" %>
-  <%= f.number_field :km %>
-  <%= f.label :actual_time, "Précisez votre temps actuel pour parcourir le nombre de kilomètre (en minute)" %>
-  <%= f.number_field :actual_time %>
-  <%= f.label :goal_time, "Précisez le temps visé pour votre prochaine course (en minute)" %>
-  <%= f.number_field :goal_time %>
-  <%= f.submit "Enregistrer mon objectif" %>
-<% end %>
+<div class="container py-5">
+  <div class="card p-4 shadow" style="background-color: white;">
+    <h1 class="mb-4 text-center"><%= @objectif.name %></h1>
 
-<%= link_to "Retour à la liste des objectifs", objectifs_path %>
+    <%= form_with model: @objectif do |f| %>
+      <div class="mb-3">
+        <%= f.label :km, "Précisez le nombre de kilomètres pour atteindre votre objectif", class: "form-label" %>
+        <%= f.number_field :km, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :actual_time, "Temps actuel pour parcourir la distance (min)", class: "form-label" %>
+        <%= f.number_field :actual_time, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :goal_time, "Temps visé pour la prochaine course (min)", class: "form-label" %>
+        <%= f.number_field :goal_time, class: "form-control" %>
+      </div>
+
+      <%= f.submit "Enregistrer mon objectif", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
