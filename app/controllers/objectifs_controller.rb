@@ -7,6 +7,7 @@ class ObjectifsController < ApplicationController
 
   def show
     @objectif = Objectif.find(params[:id])
+    @user = current_user
   end
 
   def create
@@ -22,6 +23,10 @@ private
 
 def objectif_params
   params.require(:objectif).permit(:name)
+end
+
+def requires_km?
+  name == "Courir un 10km" 
 end
 
 end
