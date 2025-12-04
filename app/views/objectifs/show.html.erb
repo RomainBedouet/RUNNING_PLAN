@@ -2,7 +2,7 @@
 
 <div class="container py-5">
   <div class="card p-4 shadow" style="background-color: white;">
-    <h1 class="mb-4 text-center"><%= @objectif.name %></h1>
+    <h1 class="mb-4 text-center">Mon objectif : <%= @objectif.name %></h1>
 
     <%= form_with model: @objectif do |f| %>
       <div class="mb-3">
@@ -20,7 +20,7 @@
         <%= f.number_field :goal_time, class: "form-control" %>
       </div>
 
-      <%= f.submit "Enregistrer mon objectif", class: "btn btn-success" %>
+      <%= f.submit "Enregistrer mon objectif", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>

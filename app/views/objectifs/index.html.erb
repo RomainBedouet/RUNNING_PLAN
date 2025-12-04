@@ -12,3 +12,25 @@
     </ul>
   </div>
 </div>
+
+<div class="container py-4">
+  <div
+    class="
+      card d-flex justify-content-center w-50 text-center mx-auto mt-4 mb-3
+      p-3
+    "
+    style="background-color: rgba(255, 255, 255, 0.3);"
+  >
+    <h2>Aucun objectif ne correspond à vos attentes ?</h2>
+
+    <%= form_with model: @objectif, url: objectifs_path do |f| %>
+      <div>
+        <%= f.label :name, "Créez le votre" %>
+        <br>
+        <%= f.text_field :name %>
+      </div>
+
+      <div style="margin-top: 10px;"><%= f.submit "Créer mon objectif" %></div>
+    <% end %>
+  </div>
+</div>

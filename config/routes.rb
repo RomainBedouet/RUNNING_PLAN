@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :user_profiles, only: [:new, :create, :edit, :update]
 
-  resources :objectifs, only: [:index, :show]
-  get "/objectifs", to: "objectifs#index"
-  get "/objectifs/id", to: "objectifs#show"
+  resources :objectifs, only: [:index, :show, :create]
   
   
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
