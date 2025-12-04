@@ -1,0 +1,25 @@
+<h1>Nouvel Objectif</h1>
+
+<%= form_with model: @objectif do |f| %>
+  <div>
+    <%= f.label :name, "Nom de l'objectif" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :actual_time, "Temps actuel" %>
+    <%= f.number_field :actual_time %>
+  </div>
+
+  <div>
+    <%= f.label :goal_time, "Temps visé" %>
+    <%= f.number_field :goal_time %>
+  </div>
+
+  <div>
+    <%= f.label :km, "Kilomètres" %>
+    <%= f.number_field :km %>
+  </div>
+
+  <%= f.submit "Créer mon objectif", class: "btn btn-success mt-3" %>
+<% end %>
