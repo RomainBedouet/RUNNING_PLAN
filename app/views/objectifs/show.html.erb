@@ -22,22 +22,31 @@
 
       <%= f.submit "Enregistrer mon objectif", class: "btn btn-primary" %>
     <% end %>
+
+    <h2>
+      Maintenant, il est temps de compléter ton profil en répondant à quelques
+      questions
+    </h2>
+
+    <%= form_with model: @user, url: user_path(@user), method: :patch do |f| %>
+      <div class="mb-3"><%= f.label :age %><%= f.number_field :age %></div>
+
+      <div class="mb-3">
+        <%= f.label :weight, "Poids (kg)" %>
+        <%= f.number_field :weight %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :height, "Taille (cm)" %>
+        <%= f.number_field :height %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :level_running, "Niveau" %>
+        <%= f.select :level_running, options_for_select([["Débutant", "débutant"], ["Intermédiaire", "intermediaire"], ["Avancé", "avance"]], @user.level_running) %>
+      </div>
+
+      <%= f.submit "Mettre à jour mon profil", class: "btn btn-success" %>
+    <% end %>
   </div>
 </div>
-
-<h1>Modifier mon profil</h1>
-
-<%= form_with model: @user, url: user_path(@user), method: :patch do |f| %>
-  <div><%= f.label :age %><%= f.number_field :age %></div>
-
-  <div><%= f.label :weight, "Poids (kg)" %><%= f.number_field :weight %></div>
-
-  <div><%= f.label :height, "Taille (cm)" %><%= f.number_field :height %></div>
-
-  <div>
-    <%= f.label :level_running, "Niveau" %>
-    <%= f.select :level_running, options_for_select([["Débutant", "débutant"], ["Intermédiaire", "intermediaire"], ["Avancé", "avance"]], @user.level_running) %>
-  </div>
-
-  <%= f.submit "Mettre à jour", class: "btn btn-success" %>
-<% end %>
