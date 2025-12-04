@@ -2,10 +2,12 @@ class ObjectifsController < ApplicationController
 
   def index
     @objectifs = Objectif.all
+    @objectif = Objectif.new
   end
 
   def show
     @objectif = Objectif.find(params[:id])
+    @user = current_user
   end
 
   def new
@@ -28,3 +30,10 @@ class ObjectifsController < ApplicationController
   end
   
 end
+
+def requires_km?
+  name == "Courir un 10km" 
+end
+
+end
+

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "profile/edit", to: "users#edit"
   patch "profile", to: "users#update"
 
+
+  resources :user, only: [:update]
+  
     resources :objectifs
 
 

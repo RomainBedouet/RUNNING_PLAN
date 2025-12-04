@@ -2,7 +2,7 @@
 
 <div class="container py-5">
   <div class="card p-4 shadow" style="background-color: white;">
-    <h1 class="mb-4 text-center"><%= @objectif.name %></h1>
+    <h1 class="mb-4 text-center">Mon objectif : <%= @objectif.name %></h1>
 
     <%= form_with model: @objectif do |f| %>
       <div class="mb-3">
@@ -20,7 +20,33 @@
         <%= f.number_field :goal_time, class: "form-control" %>
       </div>
 
-      <%= f.submit "Enregistrer mon objectif", class: "btn btn-success" %>
+      <%= f.submit "Enregistrer mon objectif", class: "btn btn-primary" %>
+    <% end %>
+
+    <h2>
+      Maintenant, il est temps de compléter ton profil en répondant à quelques
+      questions
+    </h2>
+
+    <%= form_with model: @user, url: user_path(@user), method: :patch do |f| %>
+      <div class="mb-3"><%= f.label :age %><%= f.number_field :age %></div>
+
+      <div class="mb-3">
+        <%= f.label :weight, "Poids (kg)" %>
+        <%= f.number_field :weight %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :height, "Taille (cm)" %>
+        <%= f.number_field :height %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :level_running, "Niveau" %>
+        <%= f.select :level_running, options_for_select([["Débutant", "débutant"], ["Intermédiaire", "intermediaire"], ["Avancé", "avance"]], @user.level_running) %>
+      </div>
+
+      <%= f.submit "Mettre à jour mon profil", class: "btn btn-success" %>
     <% end %>
   </div>
 </div>

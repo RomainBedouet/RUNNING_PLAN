@@ -1,6 +1,13 @@
 <div class="container py-5">
+  <h1>Bienvenue sur Running plan !</h1>
+
+  <h2>
+    Ici, tu vas découvrir notre liste d’objectifs prêts à te challenger. Choisis
+    celui qui te motive le plus et c’est parti pour ton aventure running !
+  </h2>
+
   <div class="card p-4 shadow" style="background-color: white;">
-    <h1 class="mb-4 text-center">Liste des objectifs</h1>
+    <h2 class="mb-4 text-center">Liste des objectifs</h2>
 
     <ul class="list-group list-group-flush">
       <% @objectifs.each do |objectif| %>
@@ -9,6 +16,30 @@
           <%= link_to "Je choisis cet objectif", objectif_path(objectif), class: "btn btn-primary btn-sm" %>
         </li>
       <% end %>
+
+      <div class="container py-4">
+        <div
+          class="
+            card d-flex justify-content-center w-50 text-center mx-auto mt-4
+            mb-3 p-3
+          "
+          style="background-color: rgba(255, 255, 255, 0.3);"
+        >
+          <h3>Aucun objectif ne correspond à vos attentes ?</h3>
+
+          <%= form_with model: @objectif, url: objectifs_path do |f| %>
+            <div>
+              <%= f.label :name, "Créez le votre" %>
+              <br>
+              <%= f.text_field :name %>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <%= f.submit "Créer mon objectif" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </ul>
   </div>
 </div>
