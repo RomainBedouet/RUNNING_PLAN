@@ -10,19 +10,25 @@ class ObjectifsController < ApplicationController
     @user = current_user
   end
 
+  def new
+    @objectif = Objectif.new
+  end
+
   def create
-  @objectif = current_user.objectifs.build(objectif_params)
+    @objectif = current_user.objectifs.new(objectif_params)
     if @objectif.save
-    redirect_to @objectif
+      redirect_to objectif_path(@objectif), notice: "Objectif créé avec succès."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-private
+  private
 
-def objectif_params
-  params.require(:objectif).permit(:name)
+  def objectif_params
+    params.require(:objectif).permit(:name, :actual_time, :goal_time, :km)
+  end
+  
 end
 
 def requires_km?

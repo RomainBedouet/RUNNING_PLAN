@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   get "profile/edit", to: "users#edit"
   patch "profile", to: "users#update"
 
-  resources :objectifs, only: [:index, :show, :new, :create]
+
   resources :user, only: [:update]
   
+    resources :objectifs
+
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
