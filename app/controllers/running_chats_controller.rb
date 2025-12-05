@@ -24,7 +24,7 @@ class RunningChatsController < ApplicationController
       }
     end
     history << { role: "user", content: question }
-    chat = RubyLLM.chat
+    chat = RubyLLM.chat(model: "gpt-4o-mini")
     response = chat.ask(history)
     answer = response.content
 

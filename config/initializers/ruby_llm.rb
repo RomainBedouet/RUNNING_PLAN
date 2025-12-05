@@ -1,3 +1,5 @@
 RubyLLM.configure do |config|
-  config.openai_api_key = ENV["OPENAI_API_KEY"]
+  config.provider = :github
+  config.github_api_key = ENV["GITHUB_API_KEY"]
+  config.github_model = "gpt-4o-mini"
 end
