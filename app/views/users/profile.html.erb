@@ -1,3 +1,7 @@
+<div class="container mt-5">
+  <div class="glass-card mx-auto w-50 text-center">
+    <h2 class="mb-4">
+
 <h1>Mon profil</h1>
 
 <p>Âge : <%= @user.age %> ans</p>
@@ -14,7 +18,7 @@
   <p>Temps visé : <%= @objectif.goal_time %> min</p>
   <%= link_to "Modifier cet objectif", objectif_path(@objectif), class: "btn btn-warning" %>
   <%= link_to "Supprimer cet objectif", objectif_path(@objectif),
-              method: :delete, 
+              method: :delete,
               data: { confirm: "Supprimer cet objectif ?" },
               class: "btn btn-danger" %>
 <% else %>
@@ -25,3 +29,5 @@
 <hr>
 
 <%= link_to "Discuter avec l'IA", running_chat_path, class: "btn btn-secondary" %>
+  </div>
+</div>
