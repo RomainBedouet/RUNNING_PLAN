@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "profile/edit", to: "users#edit"
   patch "profile", to: "users#update"
 
+  resource :running_chats, only: [:show, :create]
 
   resources :user, only: [:update]
   
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "chat", to: "chat#create"
-  resource :running_chat, only: [:show, :create]
+
 
 
 end

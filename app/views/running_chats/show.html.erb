@@ -11,7 +11,12 @@
       </div>
 
       <!-- Formulaire Chatbot -->
-      <%= form_with url: running_chat_path, method: :post, class: "mb-4" do %>
+      <!-- Turbo désactivé pour recharger la page -->
+      <%= form_with url: running_chats_path,
+                    method: :post,
+                    data: { turbo: false },
+                    class: "mb-4" do %>
+
         <div class="mb-3">
           <%= text_area_tag :question, nil,
                 placeholder: "Pose une question sur le running...",
@@ -22,10 +27,11 @@
         <div class="text-center">
           <%= submit_tag "Envoyer", class: "btn btn-primary btn-lg px-5" %>
         </div>
+
       <% end %>
 
       <!-- Réponse -->
-      <% if @answer %>
+      <% if @answer.present? %>
         <div class="card mt-4">
           <div class="card-header bg-light">
             <h2 class="h5 mb-0">Réponse</h2>

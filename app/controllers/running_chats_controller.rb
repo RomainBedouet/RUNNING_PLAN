@@ -1,5 +1,6 @@
 class RunningChatsController < ApplicationController
   before_action :authenticate_user!
+
   def show
     @answer = nil
   end
@@ -7,39 +8,66 @@ class RunningChatsController < ApplicationController
   def create
     user = current_user
     question = params[:question]
-    profile = "Profil du coureur : âge #{user.age}, poids #{user.weight}kg, taille #{user.height}cm, objectif principal : #{user.goal}, niveau : #{user.level_running}."
+
+    profile = "Profil du coureur : âge #{user.age}, poids #{user.weight}kg, taille #{user.height}cm, niveau : #{user.level_running}."
     selected_goals = user.objectifs.map(&:name)
-    goals_text = "Objectifs sélectionnés : #{selected_goals.join(', ')}."
+    goals_text = selected_goals.any? ? "Objectifs sélectionnés : #{selected_goals.join(', ')}." : "Aucun objectif défini."
+
     history = user.chat_messages.order(:created_at).map do |msg|
       { role: msg.role, content: msg.content }
     end
     if history.empty?
       history << {
         role: "system",
-        content: "#{profile} #{goals_text}
-        Tu es un coach sportif et professionnel de la course à pieds, tu ne réponds qu'aux questions concernant la course à pied, le running, l'alimentation pour sportifs et les bonnes pratiques du sport en général.
-        Tu dois aider le coureur à atteindre ses objectifs, proposer des ajustements si nécessaire et expliquer comment progresser.
-        Si la question ne concerne ni la course à pieds, ni le running, ni l'alimentation sportive, réponds seulement : 'Je ne répond qu'aux questions concernant le running.'
-        Pour modifier les objectifs du coureur, utilise ce format : [UPDATE_GOALS] objectif1, objectif2, objectif3"
+        content: <<~PROMPT
+          Tu es un coach professionnel spécialisé UNIQUEMENT dans :
+          - la course à pied
+          - le running
+          - les conseils d'entraînement
+          - la nutrition sportive
+          - la progression en sport d’endurance
+
+          🚫 Tu NE DOIS JAMAIS répondre à :
+          - cuisine
+          - santé générale hors sport
+          - blagues, discussions personnelles
+          - informatique
+          - sujets sans rapport avec le sport ou le running
+          - toute demande qui ne concerne PAS la course à pied
+
+          SI la question ne concerne PAS la course à pied ou la nutrition sportive :
+          👉 Répond STRICTEMENT : "Je ne réponds qu'aux questions concernant le running."
+          (NE FOURNIS AUCUNE AUTRE INFORMATION)
+
+          Garde toujours un ton professionnel et orienté coaching sportif.
+        PROMPT
       }
     end
+
+
     history << { role: "user", content: question }
-    chat = RubyLLM.chat
-    response = chat.ask(history)
-    answer = response.content
 
+    # ---- APPEL OPENAI ----
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
 
-    if answer.include?("[UPDATE_GOALS]")
-      raw_goals = answer.split("[UPDATE_GOALS]").last.strip
-      new_goals = raw_goals.split(',').map(&:strip)
-      user.objectifs = Objectif.where(name: new_goals)
-      user.save
-      answer = answer.gsub(/\[UPDATE_GOALS\].*/, "").strip
-    end
+   response = client.chat(
+  parameters: {
+    model: "gpt-4o-mini",
+    messages: history
+      }
+    )
 
+    puts "=== OPENAI RAW RESPONSE ==="
+    pp response
+
+    @answer = response.dig("choices", 0, "message", "content")
+    puts "=== PARSED ANSWER ==="
+    pp @answer
+
+    # Sauvegarde
     user.chat_messages.create(role: "user", content: question)
-    user.chat_messages.create(role: "assistant", content: answer)
-    @answer = answer
+    user.chat_messages.create(role: "assistant", content: @answer)
+
     render :show
   end
 end

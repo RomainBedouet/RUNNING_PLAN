@@ -13,7 +13,11 @@ default_objectifs = ["Se mettre à la course à pied", "Courir un 10km", "Courir
 user = User.find_or_create_by!(email: "fake@example.com") do |u|
   u.password = "password123"
 end
-
+User.create!(
+  email: "test@example.com",
+  password: "password123",
+  password_confirmation: "password123"
+)
 default_objectifs.each do |name|
   Objectif.find_or_create_by!(name: name, user: user)
 end
