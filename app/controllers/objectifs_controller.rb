@@ -23,6 +23,16 @@ class ObjectifsController < ApplicationController
     end
   end
 
+  def update
+    @objectif = current_user.objectifs.find(params[:id])
+
+    if @objectif.update(objectif_params)
+      redirect_to objectif_path(@objectif), notice: "Objectif mis à jour avec succès."
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def objectif_params
@@ -34,6 +44,3 @@ end
 def requires_km?
   name == "Courir un 10km" 
 end
-
-end
-
