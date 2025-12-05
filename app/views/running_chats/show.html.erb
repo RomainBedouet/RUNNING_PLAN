@@ -2,40 +2,42 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
 
-      <!-- Titre et description -->
-      <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold mb-3">Chat Running</h1>
-        <p class="lead text-muted">
-          Posez vos questions sur la course à pied et obtenez des conseils personnalisés pour améliorer vos performances.
-        </p>
-      </div>
+  <!-- Titre et description -->
+  <div class="text-center mb-5">
+    <h1 class="display-4 fw-bold mb-3">Chat Running</h1>
+    <p class="lead text-muted">
+      Posez vos questions sur la course à pied et obtenez des conseils personnalisés pour améliorer vos performances.
+    </p>
+  </div>
 
-      <!-- Formulaire Chatbot -->
-      <%= form_with url: running_chat_path, method: :post, class: "mb-4" do %>
-        <div class="mb-3">
-          <%= text_area_tag :question, nil,
-                placeholder: "Pose une question sur le running...",
-                class: "form-control",
-                rows: 4 %>
-        </div>
-
-        <div class="text-center">
-          <%= submit_tag "Envoyer", class: "btn btn-primary btn-lg px-5" %>
-        </div>
-      <% end %>
-
-      <!-- Réponse -->
-      <% if @answer %>
-        <div class="card mt-4">
-          <div class="card-header bg-light">
-            <h2 class="h5 mb-0">Réponse</h2>
-          </div>
-          <div class="card-body">
-            <p class="mb-0"><%= @answer %></p>
-          </div>
-        </div>
-      <% end %>
-
+  <!-- Formulaire Chatbot -->
+  <%= form_with url: running_chats_path, method: :post, class: "mb-4" do %>
+    <div class="mb-3">
+      <%= text_area_tag :question, nil,
+            placeholder: "Pose une question sur le running...",
+            class: "form-control",
+            rows: 4 %>
     </div>
+
+    <div class="text-center">
+      <%= submit_tag "Envoyer", class: "btn btn-primary btn-lg px-5" %>
+    </div>
+  <% end %>
+
+  <!-- Réponse -->
+  <% if @answer %>
+    <div class="card mt-4">
+      <div class="card-header bg-light">
+        <h2 class="h5 mb-0">Réponse</h2>
+      </div>
+      <div class="card-body">
+        <p class="mb-0"><%= @answer %></p>
+      </div>
+    </div>
+  <% end %>
+
+</div>
+```
+
   </div>
 </div>
