@@ -1,20 +1,11 @@
 <h1>Modifier mon profil</h1>
 
 <%= form_with model: @user, url: profile_path, method: :patch do |f| %>
-  <div>
-    <%= f.label :age %>
-    <%= f.number_field :age %>
-  </div>
+  <div><%= f.label :age %><%= f.number_field :age %></div>
 
-  <div>
-    <%= f.label :weight, "Poids (kg)" %>
-    <%= f.number_field :weight %>
-  </div>
+  <div><%= f.label :weight, "Poids (kg)" %><%= f.number_field :weight %></div>
 
-  <div>
-    <%= f.label :height, "Taille (cm)" %>
-    <%= f.number_field :height %>
-  </div>
+  <div><%= f.label :height, "Taille (cm)" %><%= f.number_field :height %></div>
 
   <div>
     <%= f.label :level_running, "Niveau" %>
