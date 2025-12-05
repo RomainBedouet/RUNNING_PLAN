@@ -1,48 +1,45 @@
 <div class="container mt-5">
   <div class="glass-card mx-auto w-75 p-4">
+    <div class="container py-5">
+      <h1>Bienvenue sur Running plan</h1>
 
-<div class="container py-5">
-  <h1>Bienvenue sur Running plan !</h1>
+      <h2 class="subtitle-grey">
+        Ici, tu vas découvrir notre liste d’objectifs prêts à te challenger.
+        Choisis celui qui te motive le plus et c’est parti pour ton aventure
+        running !
+      </h2>
 
-  <h2>
-    Ici, tu vas découvrir notre liste d’objectifs prêts à te challenger. Choisis
-    celui qui te motive le plus et c’est parti pour ton aventure running !
-  </h2>
+      <ul class="list-group list-group-flush">
+        <% @objectifs.each do |objectif| %>
+          <li
+            class="
+              list-group-item d-flex justify-content-between
+              align-items-center
+            "
+          >
+            <%= objectif.name %>
+            <%= link_to "Je choisis cet objectif", objectif_path(objectif), class: "btn btn-outline-primary btn-sm mt-2" %>
+          </li>
+        <% end %>
 
-
-    <h2 class="mb-4 text-center">Liste des objectifs</h2>
-
-    <ul class="list-group list-group-flush">
-      <% @objectifs.each do |objectif| %>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          <%= objectif.name %>
-          <%= link_to "Je choisis cet objectif", objectif_path(objectif), class: "btn btn-primary btn-sm" %>
-        </li>
-      <% end %>
-
-      <div class="container py-4">
-        <div
-          class="
-            card d-flex justify-content-center w-50 text-center mx-auto mt-4
-            mb-3 p-3
-          "
-          style="background-color: rgba(255, 255, 255, 0.3);"
+        <li
+          class="list-group-item text-center"
+          style="background-color: rgba(255,255,255,0.5);"
         >
-          <h3>Aucun objectif ne correspond à vos attentes ?</h3>
+          <h5 class="mt-2 mb-3">
+            Aucun objectif ne correspond à vos attentes ?
+          </h5>
 
-          <%= form_with model: @objectif, url: objectifs_path do |f| %>
-            <div>
-              <%= f.label :name, "Créez le votre" %>
-              <br>
-              <%= f.text_field :name %>
+          <%= form_with model: @objectif, url: objectifs_path, class: "d-flex flex-column align-items-center" do |f| %>
+            <div class="mb-2 w-50">
+              <%= f.label :name, "Créez votre propre objectif", class: "form-label" %>
+              <%= f.text_field :name, class: "form-control text-center" %>
             </div>
 
-            <div style="margin-top: 10px;">
-              <%= f.submit "Créer mon objectif" %>
-            </div>
+            <%= f.submit "Créer mon objectif", class: "btn btn-outline-primary btn-sm mt-2" %>
           <% end %>
-        </div>
-      </div>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

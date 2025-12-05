@@ -9,7 +9,7 @@ body {
 /* === TITRE PRINCIPAL === */
 #Welcome,
 h1 {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Calibri', 'Trebuchet MS', sans-serif;
   color: white;
   text-shadow: 0 4px 12px rgba(0,0,0,0.6); // lisible sur fond
   font-weight: 800;
@@ -23,6 +23,11 @@ h1 {
   background: #0D6EFD;
   border-radius: 5px;
   margin: 8px auto 22px;
+}
+
+.subtitle-grey {
+  color: #4a4a4a; 
+  font-weight: 400;
 }
 
 /* === CARDS === */

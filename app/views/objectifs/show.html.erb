@@ -1,10 +1,8 @@
-<div class="container mt-5">
-  <div class="glass-card mx-auto w-75 p-4">
-    <h2 class="mb-3">
-
 <%= link_to "Retour à la liste des objectifs", objectifs_path, class: "btn btn-primary mt-3" %>
 
-Mon objectif : <%= @objectif.name %></h1>
+<div class="container mt-5">
+  <div class="glass-card mx-auto w-75 p-4">
+    <h1>Mon objectif : <%= @objectif.name %></h1>
 
     <%= form_with model: @objectif, url: objectif_path(@objectif), method: :patch do |f| %>
       <div class="mb-3">
@@ -22,34 +20,42 @@ Mon objectif : <%= @objectif.name %></h1>
         <%= f.number_field :goal_time, class: "form-control" %>
       </div>
 
-      <%= f.submit "Enregistrer mon objectif", class: "btn btn-primary" %>
+      <%= f.submit "Enregistrer mon objectif", class: "btn btn-primary mb-4" %>
     <% end %>
 
     <h2>
-      Mes informations
+      Compléter mes informations
     </h2>
 
     <%= form_with model: @user, url: profile_path, method: :patch do |f| %>
-      <div class="mb-3"><%= f.label :age %><%= f.number_field :age %></div>
-
       <div class="mb-3">
-        <%= f.label :weight, "Poids (kg)" %>
-        <%= f.number_field :weight %>
+        <%= f.label :age, class: "form-label" %>
+        <%= f.number_field :age, class: "form-control" %>
       </div>
 
       <div class="mb-3">
-        <%= f.label :height, "Taille (cm)" %>
-        <%= f.number_field :height %>
+        <%= f.label :weight, "Poids (kg)", class: "form-label" %>
+        <%= f.number_field :weight, class: "form-control" %>
       </div>
 
       <div class="mb-3">
-        <%= f.label :level_running, "Niveau" %>
-        <%= f.select :level_running, options_for_select([["Débutant", "débutant"], ["Intermédiaire", "intermediaire"], ["Avancé", "avance"]], @user.level_running) %>
+        <%= f.label :height, "Taille (cm)", class: "form-label" %>
+        <%= f.number_field :height, class: "form-control" %>
       </div>
 
-      <%= f.submit "Enregistrer mes informations", class: "btn btn-success" %>
+      <div class="mb-3">
+        <%= f.label :level_running, "Niveau", class: "form-label" %>
+
+        <%= f.select :level_running,
+             options_for_select([["Débutant", "débutant"],
+                                 ["Intermédiaire", "intermediaire"],
+                                 ["Avancé", "avance"]],
+                                 @user.level_running),
+             {},                                             
+             class: "form-control" %>
+      </div>
+
+      <%= f.submit "Enregistrer mes informations", class: "btn btn-primary" %>
     <% end %>
-  </div>
-</div>
   </div>
 </div>
