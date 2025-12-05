@@ -2,16 +2,16 @@ class RunningChatsController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @answer = nil
+  @answer = nil
   end
 
   def create
-    user = current_user
-    question = params[:question]
+  user = current_user
+  question = params[:question]
+
 
   # Profil utilisateur
   profile = "Profil du coureur : âge #{user.age}, poids #{user.weight}kg, taille #{user.height}cm, niveau : #{user.level_running}."
-
   # Objectifs de l'utilisateur
   selected_goals = user.objectifs.map(&:name)
   goals_text = selected_goals.any? ? "Objectifs sélectionnés : #{selected_goals.join(', ')}." : "Aucun objectif défini."
@@ -34,12 +34,9 @@ class RunningChatsController < ApplicationController
 
   history << { role: "user", content: question }
 
-  # Appel à RubyLLM avec clé d'environnement
-  chat = RubyLLM.chat(
-    model: "gpt-4o-mini",
-    client_options: { access_token: ENV["OPENAI_API_KEY"] }
-  )
-  response = chat.ask(history)
+  # Création du client RubyLLM et appel au chat
+  client = RubyLLM.chat(model: "gpt-4o-mini")
+  response = client.ask(history)
   answer = response.content
 
   # Mise à jour des objectifs si nécessaire
@@ -51,7 +48,7 @@ class RunningChatsController < ApplicationController
     answer = answer.gsub(/\[UPDATE_GOALS\].*/, "").strip
   end
 
-  # Sauvegarde de l'historique
+  # Sauvegarde de l'historique des messages
   user.chat_messages.create(role: "user", content: question)
   user.chat_messages.create(role: "assistant", content: answer)
 
