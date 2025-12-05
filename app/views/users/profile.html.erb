@@ -1,3 +1,7 @@
+<div class="container mt-5">
+  <div class="glass-card mx-auto w-50 text-center">
+    <h2 class="mb-4">
+
 <h1>Mon profil</h1>
 
 <p>Âge : <%= @user.age %> ans</p>
@@ -5,17 +9,25 @@
 <p>Taille : <%= @user.height %> cm</p>
 <p>Niveau : <%= @user.level_running %></p>
 
-<h2>Objectifs</h2>
-<ul>
-  <% @user.objectifs.each do |objectif| %>
-    <li>
-      <%= objectif.name %> -
-      <%= link_to "Modifier", edit_objectif_path(objectif) %>
-      <%= link_to "Supprimer", objectif_path(objectif), method: :delete, data: { confirm: "Êtes-vous sûr ?" } %>
-    </li>
-  <% end %>
-</ul>
+<h2>Mon objectif</h2>
 
-<%= link_to "Modifier mon profil", profile_edit_path, class: "btn btn-primary" %>
-<%= link_to "Ajouter un objectif", new_objectif_path, class: "btn btn-secondary" %>
+<% if @objectif.present? %>
+  <p><strong><%= @objectif.name %></strong></p>
+  <p>Kilomètres : <%= @objectif.km %></p>
+  <p>Temps actuel : <%= @objectif.actual_time %> min</p>
+  <p>Temps visé : <%= @objectif.goal_time %> min</p>
+  <%= link_to "Modifier cet objectif", objectif_path(@objectif), class: "btn btn-warning" %>
+  <%= link_to "Supprimer cet objectif", objectif_path(@objectif),
+              method: :delete,
+              data: { confirm: "Supprimer cet objectif ?" },
+              class: "btn btn-danger" %>
+<% else %>
+  <p>Aucun objectif sélectionné.</p>
+  <%= link_to "Créer un objectif", new_objectif_path, class: "btn btn-primary" %>
+<% end %>
+
+<hr>
+
 <%= link_to "Discuter avec l'IA", running_chat_path, class: "btn btn-secondary" %>
+  </div>
+</div>
