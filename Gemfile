@@ -3,7 +3,8 @@ source "https://rubygems.org"
 ruby "3.3.5"
 
 gem "devise"
-gem "ruby_llm", "~> 1.2.0"
+gem "ruby-openai"
+# gem "ruby-llm", github: "merlinapp/ruby-llm"
 gem "dotenv-rails", groups: [:development, :test]
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
