@@ -1,8 +1,10 @@
+<div class="container mt-5">
+  <div class="glass-card mx-auto w-75 p-4">
+    <h2 class="mb-3">
+
 <%= link_to "Retour à la liste des objectifs", objectifs_path, class: "btn btn-primary mt-3" %>
 
-<div class="container py-5">
-  <div class="card p-4 shadow" style="background-color: white;">
-    <h1 class="mb-4 text-center">Mon objectif : <%= @objectif.name %></h1>
+Mon objectif : <%= @objectif.name %></h1>
 
     <%= form_with model: @objectif, url: objectif_path(@objectif), method: :patch do |f| %>
       <div class="mb-3">
@@ -24,8 +26,7 @@
     <% end %>
 
     <h2>
-      Maintenant, il est temps de compléter ton profil en répondant à quelques
-      questions
+      Mes informations
     </h2>
 
     <%= form_with model: @user, url: profile_path, method: :patch do |f| %>
@@ -48,5 +49,7 @@
 
       <%= f.submit "Enregistrer mes informations", class: "btn btn-success" %>
     <% end %>
+  </div>
+</div>
   </div>
 </div>
